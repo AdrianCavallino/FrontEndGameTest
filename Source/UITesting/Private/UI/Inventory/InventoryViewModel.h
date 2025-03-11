@@ -5,9 +5,7 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
-#include "Viewports.h"
 #include "Engine/DataTable.h"
-#include "UObject/NoExportTypes.h"
 #include "InventoryViewModel.generated.h"
 
 UENUM(BlueprintType)
@@ -50,6 +48,9 @@ struct FInventoryItem
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	int32 itemQuantity;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FName RowName;
 };
 
 USTRUCT(BlueprintType)
@@ -59,8 +60,20 @@ struct FInventoryTableRow : public FTableRowBase
 
 	UPROPERTY(EditDefaultsOnly)
 	FInventoryItem InventoryItem;
-	
 };
+
+USTRUCT(BlueprintType)
+struct FIngredients
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FInventoryItem ItemNeeded;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	int32 AmountNeeded;
+};
+
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnTabSelected, FGameplayTag, CategoryTag, UUserWidget*, Widget);
@@ -120,9 +133,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	TArray<FInventoryItem> GetFilteredCraftingItems(FGameplayTag Tag) const;
 
-	/*UFUNCTION(BlueprintCallable)
-	TArray<FInventoryItem> GetFilteredCraftableItems();
-    
 	UFUNCTION(BlueprintCallable)
-	bool CanCraftItem(const FInventoryItem& Item);*/
+	TArray<FIngredients> GetCraftingIngridientsByRowName(FName RowName);
 };

@@ -9,14 +9,15 @@
   <component name="ChangeListManager">
     <list default="true" id="b00ea306-052c-4b98-8f57-a449291fd9da" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UITesting/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UITesting/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main/Blueprint/DA_Crafting.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main/Blueprint/DA_Crafting.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main/Blueprint/DA_Item.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main/Blueprint/DA_Item.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main/Blueprint/DT_InventoryItem.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main/Blueprint/DT_InventoryItem.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main/Blueprint/UI/BP_inventoryViewModel.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main/Blueprint/UI/BP_inventoryViewModel.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main/Blueprint/UI/UserWidget/WBP_CraftingGrid.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main/Blueprint/UI/UserWidget/WBP_CraftingGrid.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main/Blueprint/UI/UserWidget/WBP_SideBar.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main/Blueprint/UI/UserWidget/WBP_SideBar.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UITesting/Private/UI/HUD/MainHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UITesting/Private/UI/HUD/MainHUD.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main/Blueprint/UI/UserWidget/WBP_GridItem.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main/Blueprint/UI/UserWidget/WBP_GridItem.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main/Blueprint/UI/UserWidget/WBP_ItemDetail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main/Blueprint/UI/UserWidget/WBP_ItemDetail.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/UITesting/Private/UI/Inventory/InventoryViewModel.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UITesting/Private/UI/Inventory/InventoryViewModel.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/UITesting/Private/UI/Inventory/InventoryViewModel.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UITesting/Private/UI/Inventory/InventoryViewModel.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UITesting/Private/UI/Inventory/InventoryWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UITesting/Private/UI/Inventory/InventoryWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UITesting/Private/UI/Inventory/InventoryWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UITesting/Private/UI/Inventory/InventoryWidget.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +28,36 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -140,7 +171,7 @@
       <workItem from="1741508659782" duration="7245000" />
       <workItem from="1741563218833" duration="681000" />
       <workItem from="1741635751808" duration="8529000" />
-      <workItem from="1741656398352" duration="6551000" />
+      <workItem from="1741656398352" duration="13186000" />
     </task>
     <servers />
   </component>
