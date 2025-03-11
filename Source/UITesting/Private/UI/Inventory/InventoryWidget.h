@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
+#include "InventoryViewModel.h"
 #include "Blueprint/UserWidget.h"
 #include "InventoryWidget.generated.h"
 
@@ -41,4 +43,7 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void InitializeChildWidget();
+
+	UFUNCTION(BlueprintCallable)
+	TArray<FInventoryItem> FilterCraftingItem(UPanelWidget* InWidget, FGameplayTag Tag);
 };

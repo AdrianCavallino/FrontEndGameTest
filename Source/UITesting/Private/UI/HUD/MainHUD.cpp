@@ -15,8 +15,6 @@ void AMainHUD::BeginPlay()
 	{
 		InventoryViewModel = NewObject<UInventoryViewModel>(this, InventoryViewModelClass);
 	}
-
-	InventoryViewModel->SetTab(ECraftingCategory::ECT_All);
 	//InitializeWidget();
 
 	// Create and attach the Inventory Widget

@@ -63,7 +63,7 @@ struct FInventoryTableRow : public FTableRowBase
 };
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnTabSelected, ECraftingCategory, CraftingTab);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnTabSelected, FGameplayTag, CategoryTag, UUserWidget*, Widget);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnItemSelected,const FInventoryItem&, InventoryItem);
 
 
@@ -77,7 +77,7 @@ class UInventoryViewModel : public UObject
 
 private:
 	UPROPERTY(BlueprintReadOnly, Category="State", meta=(AllowPrivateAccess = "true"))
-	ECraftingCategory SelectedTab;
+	FGameplayTag FilterTag;
 	
 	UPROPERTY(BlueprintReadOnly, Category="State", meta=(AllowPrivateAccess = "true"))
 	FInventoryItem SelectedItem;
@@ -96,20 +96,29 @@ private:
 
 
 public:
+	UPROPERTY(BlueprintAssignable)
 	FOnTabSelected OnTabSelected;
+
+	UPROPERTY(BlueprintAssignable)
 	FOnItemSelected OnItemSelected;
 	
 	UFUNCTION(BlueprintCallable)
-	void SetTab(ECraftingCategory NewTab);
+	void SetTab(FGameplayTag NewTabTag, UUserWidget* Widget);
 
 	UFUNCTION(BlueprintCallable)
 	void SetDisplayItem(const FInventoryItem& NewItem);
 
 	UFUNCTION(BlueprintCallable)
-	FORCEINLINE ECraftingCategory GetSelectedTab() const { return SelectedTab; }
+	FORCEINLINE FGameplayTag GetSelectedTab() const { return FilterTag; }
 
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE FInventoryItem GetSelectedItem() const { return SelectedItem; }
+
+	UFUNCTION(BlueprintCallable)
+	TArray<FInventoryItem> GetAllCraftingItem() const ;
+
+	UFUNCTION(BlueprintCallable)
+	TArray<FInventoryItem> GetFilteredCraftingItems(FGameplayTag Tag) const;
 
 	/*UFUNCTION(BlueprintCallable)
 	TArray<FInventoryItem> GetFilteredCraftableItems();

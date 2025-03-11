@@ -3,12 +3,14 @@
 
 #include "UI/Inventory/InventoryViewModel.h"
 
-void UInventoryViewModel::SetTab(ECraftingCategory NewTab)
+#include "Data/CraftingDataAsset.h"
+
+void UInventoryViewModel::SetTab(FGameplayTag NewTabTag, UUserWidget* Widget)
 {
-	if(SelectedTab != NewTab)
+	if(FilterTag != NewTabTag)
 	{
-		SelectedTab = NewTab;
-		OnTabSelected.Broadcast(SelectedTab);
+		FilterTag = NewTabTag;
+		OnTabSelected.Broadcast(FilterTag, Widget);
 	}
 }
 
@@ -19,4 +21,42 @@ void UInventoryViewModel::SetDisplayItem(const FInventoryItem& NewItem)
 		SelectedItem = NewItem;
 		OnItemSelected.Broadcast(SelectedItem);
 	}
+}
+
+TArray<FInventoryItem> UInventoryViewModel::GetAllCraftingItem() const
+{
+	if(!DummyCraftingData)
+	{
+		return {};
+	}
+
+	UCraftingDataAsset* DataAsset = Cast<UCraftingDataAsset>(DummyCraftingData);
+
+	if(!DataAsset) return {};
+
+	return DataAsset->GetAllItems();
+}
+
+TArray<FInventoryItem> UInventoryViewModel::GetFilteredCraftingItems(FGameplayTag Tag) const
+{
+	if(!DummyCraftingData)
+	{
+		return {};
+	}
+
+	const UCraftingDataAsset* DataAsset = Cast<UCraftingDataAsset>(DummyCraftingData);
+
+	if(!DataAsset) return {};
+
+	TArray<FInventoryItem> FilteredItem = {};
+
+	for (FInventoryItem AllItem : DataAsset->GetAllItems())
+	{
+		
+	}
+
+	return DataAsset->GetAllItems().FilterByPredicate([Tag](const FInventoryItem& Item)
+	{
+		return Item.ItemTag == Tag;
+	});
 }
