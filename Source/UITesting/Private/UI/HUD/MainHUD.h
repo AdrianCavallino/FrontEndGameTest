@@ -18,7 +18,6 @@ class AMainHUD : public AHUD
 
 protected:
 	virtual void BeginPlay() override;
-	void InitializeWidget();
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite,Category = "Inventory")
@@ -27,6 +26,9 @@ public:
 	UPROPERTY(EditAnywhere, Category="UI")
 	TSubclassOf<UInventoryWidget> InventoryWidgetClass;
 
+	UPROPERTY(EditAnywhere, Category="UI")
+	TSubclassOf<UUserWidget> InitialWidgetClass;
+
 	UFUNCTION(BlueprintCallable)
 	void ShowMenu();
 
@@ -34,6 +36,9 @@ private:
 	UPROPERTY()
 	UInventoryWidget* InventoryWidget;
 
+	UPROPERTY()
+	UUserWidget* InitialWidget;
+	
 	UPROPERTY()
 	UInventoryViewModel* InventoryViewModel;
 

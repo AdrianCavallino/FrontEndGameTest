@@ -4,6 +4,7 @@
 #include "UI/Inventory/InventoryViewModel.h"
 
 #include "Data/CraftingDataAsset.h"
+#include "Data/ItemDataAsset.h"
 
 void UInventoryViewModel::SetTab(FGameplayTag NewTabTag, UUserWidget* Widget)
 {
@@ -23,6 +24,51 @@ void UInventoryViewModel::SetDisplayItem(const FInventoryItem& NewItem)
 	}
 }
 
+void UInventoryViewModel::PinCraftItem(const FInventoryItem& Item)
+{
+	if(PinnedCraftItems.Contains(Item))
+	{
+		PinnedCraftItems.Remove(Item);
+	} else
+	{
+		PinnedCraftItems.Add(Item);
+	}
+
+	OnItemPinned.Broadcast(Item);
+}
+
+void UInventoryViewModel::PinInventoryItem(const FInventoryItem& Item)
+{
+	if(PinnedInventoryItem.Contains(Item))
+	{
+		PinnedInventoryItem.Remove(Item);
+	} else
+	{
+		PinnedInventoryItem.Add(Item);
+	}
+
+	OnItemPinned.Broadcast(Item);
+}
+
+TArray<FInventoryItem> UInventoryViewModel::GetAllInventoryItem() const
+{
+	if(!DummyData) return {};
+
+	UItemDataAsset* ItemDataAsset = Cast<UItemDataAsset>(DummyData);
+
+	if(!ItemDataAsset) return {};
+
+	if (PinnedInventoryItem.IsEmpty())
+	{
+		return ItemDataAsset->GetAllItems();
+	}
+
+	return ItemDataAsset->GetAllItems().FilterByPredicate([this](const FInventoryItem& Item)
+	{
+		return !PinnedInventoryItem.Contains(Item);
+	});
+}
+
 TArray<FInventoryItem> UInventoryViewModel::GetAllCraftingItem() const
 {
 	if(!DummyCraftingData)
@@ -34,7 +80,15 @@ TArray<FInventoryItem> UInventoryViewModel::GetAllCraftingItem() const
 
 	if(!DataAsset) return {};
 
-	return DataAsset->GetAllItems();
+	if(PinnedCraftItems.IsEmpty())
+	{
+		return DataAsset->GetAllItems();
+	}
+
+	return DataAsset->GetAllItems().FilterByPredicate([this](const FInventoryItem& Item)
+	{
+		return !PinnedCraftItems.Contains(Item);
+	});
 }
 
 TArray<FInventoryItem> UInventoryViewModel::GetFilteredCraftingItems(FGameplayTag Tag) const
@@ -50,9 +104,17 @@ TArray<FInventoryItem> UInventoryViewModel::GetFilteredCraftingItems(FGameplayTa
 
 	TArray<FInventoryItem> FilteredItem = {};
 
-	return DataAsset->GetAllItems().FilterByPredicate([Tag](const FInventoryItem& Item)
+	if (PinnedCraftItems.IsEmpty())
+	{
+		return DataAsset->GetAllItems().FilterByPredicate([Tag, this](const FInventoryItem& Item)
 	{
 		return Item.ItemTag == Tag;
+	});
+	}
+
+	return DataAsset->GetAllItems().FilterByPredicate([Tag, this](const FInventoryItem& Item)
+	{
+		return Item.ItemTag == Tag && !PinnedCraftItems.Contains(Item);
 	});
 }
 

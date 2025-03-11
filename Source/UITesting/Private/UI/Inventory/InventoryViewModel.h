@@ -19,9 +19,9 @@ enum class ECraftingCategory : uint8
 UENUM(BlueprintType)
 enum class EItemCategory : uint8
 {
-	IC_Craft,
-	IC_Material,
-	IC_NormalItem,
+	IC_Building  UMETA(DisplayName = "Building"),
+	IC_Consumable UMETA(DisplayName = "Consumable"),
+	IC_NormalItem UMETA(DisplayName = "Item"),
 };
 
 USTRUCT(BlueprintType)
@@ -34,11 +34,19 @@ struct FInventoryItem
 		return ItemName != Other.ItemName;
 	}
 
+	bool operator==(FInventoryItem Other) const
+	{
+		return ItemName == Other.ItemName;
+	}
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	FString ItemName;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	FGameplayTag ItemTag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	EItemCategory ItemCategory;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	FString ItemDescription;
@@ -79,6 +87,8 @@ struct FIngredients
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnTabSelected, FGameplayTag, CategoryTag, UUserWidget*, Widget);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnItemSelected,const FInventoryItem&, InventoryItem);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnItemPinned, const FInventoryItem&, InventoryItem);
+
 
 /**
  * 
@@ -99,7 +109,13 @@ private:
 	TArray<FInventoryItem> CraftItems;
 
 	UPROPERTY(BlueprintReadOnly, Category="State", meta=(AllowPrivateAccess = "true"))
+	TArray<FInventoryItem> PinnedCraftItems;
+
+	UPROPERTY(BlueprintReadOnly, Category="State", meta=(AllowPrivateAccess = "true"))
 	TArray<FInventoryItem> PlayerInventory;
+
+	UPROPERTY(BlueprintReadOnly, Category="State", meta=(AllowPrivateAccess = "true"))
+	TArray<FInventoryItem> PinnedInventoryItem;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Dummy data", meta=(AllowPrivateAccess = "true"))
 	TObjectPtr<UDataAsset> DummyData;
@@ -114,6 +130,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FOnItemSelected OnItemSelected;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnItemPinned OnItemPinned;
 	
 	UFUNCTION(BlueprintCallable)
 	void SetTab(FGameplayTag NewTabTag, UUserWidget* Widget);
@@ -122,11 +141,20 @@ public:
 	void SetDisplayItem(const FInventoryItem& NewItem);
 
 	UFUNCTION(BlueprintCallable)
+	void PinCraftItem(const FInventoryItem& Item);
+
+	UFUNCTION(BlueprintCallable)
+	void PinInventoryItem(const FInventoryItem& Item);
+
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE FGameplayTag GetSelectedTab() const { return FilterTag; }
 
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE FInventoryItem GetSelectedItem() const { return SelectedItem; }
 
+	UFUNCTION(BlueprintCallable)
+	TArray<FInventoryItem> GetAllInventoryItem() const;
+	
 	UFUNCTION(BlueprintCallable)
 	TArray<FInventoryItem> GetAllCraftingItem() const ;
 

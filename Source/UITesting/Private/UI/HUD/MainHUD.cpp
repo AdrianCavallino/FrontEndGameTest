@@ -30,12 +30,17 @@ void AMainHUD::BeginPlay()
 		}
 	}
 
-	PlayerController = GetOwningPlayerController();
-}
+	if(InitialWidgetClass)
+	{
+		InitialWidget = CreateWidget<UUserWidget>(GetWorld(), InitialWidgetClass);
 
-void AMainHUD::InitializeWidget()
-{
-	
+		if(InitialWidget)
+		{
+			InitialWidget->AddToViewport();
+		}
+	}
+
+	PlayerController = GetOwningPlayerController();
 }
 
 void AMainHUD::ShowMenu()
@@ -44,12 +49,14 @@ void AMainHUD::ShowMenu()
 	
 	if(InventoryWidget->IsVisible())
 	{
+		InitialWidget->SetVisibility(ESlateVisibility::Visible);
 		InventoryWidget->SetVisibility(ESlateVisibility::Hidden);
 		PlayerController->SetInputMode(FInputModeGameOnly());
 		PlayerController->SetShowMouseCursor(false);
 	}
 	else
 	{
+		InitialWidget->SetVisibility(ESlateVisibility::Hidden);
 		InventoryWidget->SetVisibility(ESlateVisibility::Visible);
 		PlayerController->SetInputMode(FInputModeGameAndUI());
 		PlayerController->SetShowMouseCursor(true);
